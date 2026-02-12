@@ -1,0 +1,10 @@
+# OpenClaw Daily Tasks
+# 每晚10点执行健康检查和日报
+
+0 22 * * * cd /root/.openclaw/workspace && python3 scripts/daily_health_check.py >> /var/log/openclaw_daily.log 2>&1
+
+# 每晚10点30分发送日报通知
+30 22 * * * cd /root/.openclaw/workspace && python3 scripts/send_daily_report.py >> /var/log/openclaw_daily.log 2>&1
+
+# 每日求职搜索任务
+0 10,15 * * * /root/.openclaw/workspace/scripts/job_search_daily.sh >> /root/.openclaw/workspace/logs/job_search.log 2>&1
