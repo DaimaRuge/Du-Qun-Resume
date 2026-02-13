@@ -117,3 +117,14 @@
 - [BOSS直聘] AI产品总监: https://www.zhipin.com/web/geek/job?query=AI产品总监
 - [前程无忧] AI产品总监: https://search.51job.com/list/000000,000000,0000,00,9,99,AI产品总监,2,1.html
 - [拉勾网] AI产品总监: https://www.lagou.com/wn/zhaopin?kd=AI产品总监
+
+
+---
+
+## 新增搜索 (2026-02-13 14:00:51)
+
+- [LinkedIn] AI产品总监: https://www.linkedin.com/jobs/search/?keywords=AI产品总监&location=China
+- [猎聘] AI产品总监: https://www.liepin.com/zhaopin/?key=AI产品总监
+- [BOSS直聘] AI产品总监: https://www.zhipin.com/web/geek/job?query=AI产品总监
+- [前程无忧] AI产品总监: https://search.51job.com/list/000000,000000,0000,00,9,99,AI产品总监,2,1.html
+- [拉勾网] AI产品总监: https://www.lagou.com/wn/zhaopin?kd=AI产品总监
