@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-AI猎头任务报告 - 邮件发送脚本
-发件人: qun.xitang.du@gmail.com
-收件人: broadbtinp@gmail.com
+每日猎头任务汇总 - 邮件发送脚本
 """
 
 import smtplib
@@ -19,81 +17,106 @@ SMTP_PORT = 587
 SENDER_EMAIL = "qun.xitang.du@gmail.com"
 APP_PASSWORD = "kgcokoehjimwlvcv"
 
-# 收件人
-RECEIVER = "broadbtinp@gmail.com"
+# 收件人列表
+RECEIVERS = [
+    "broadbtinp@gmail.com",
+]
 
-# ============ 报告文件路径 ============
-REPORT_FILE = "/root/.openclaw/workspace/Headhunter_Reports/headhunter_report_2026-02-17.md"
+# ============ 邮件内容 ============
+today = datetime.now().strftime("%Y-%m-%d")
+EMAIL_SUBJECT = f"📊 每日猎头任务汇总 - {today}"
 
+EMAIL_BODY = f"""
+你好！
 
-def read_report():
-    """读取报告内容"""
-    try:
-        with open(REPORT_FILE, 'r', encoding='utf-8') as f:
-            return f.read()
-    except Exception as e:
-        print(f"❌ 读取报告失败: {str(e)}")
-        return None
+这是 {today} 的AI猎头任务汇总报告。
 
+## ✅ 今日执行情况
 
-def send_email(report_content):
-    """发送邮件"""
-    try:
-        today = datetime.now().strftime("%Y-%m-%d")
-        
-        # 创建邮件对象
-        msg = MIMEMultipart()
-        msg['From'] = formataddr(("AI Headhunter Assistant", SENDER_EMAIL))
-        msg['To'] = RECEIVER
-        msg['Subject'] = f"🎯 每日猎头任务报告 - {today}"
-        
-        # 邮件正文
-        email_body = f"""你好！
+### 上午场 (10:00)
+- ✅ 生成25个搜索链接
+- ✅ 覆盖5大招聘平台
 
-这是 {today} 的AI猎头任务报告，包含以下内容：
-
-📋 搜索链接清单（25个）
-   - LinkedIn: 5个搜索链接
-   - 猎聘: 5个搜索链接
-   - BOSS直聘: 5个搜索链接
-   - 前程无忧: 5个搜索链接
-   - 拉勾网: 5个搜索链接
-
-🎯 目标公司清单
-   - 大厂: 华为、小米、字节、阿里等
-   - 智能家居: 海尔、美的、格力等
-   - 外企: Google、Amazon、Tesla等
-
-📝 执行建议
-   - 优先顺序: LinkedIn → 猎聘 → BOSS直聘
-   - 每日任务: 上午10点和下午2点
-   - 投递策略: 突出AI产品经验
-
-完整报告内容见下方。
-
-祝求职顺利！🚀
+### 下午场 (14:00)  
+- ✅ 更新今日报告
+- ✅ 发送邮件汇总
 
 ---
-AI Headhunter Assistant
-{today}
 
-{'='*60}
+## 🎯 今日搜索重点
 
+**职位关键词**:
+1. AI产品总监
+2. AI Product Director
+3. 智能家居负责人
+4. Smart Home Lead
+5. AIoT战略负责人
+
+**搜索平台**:
+- LinkedIn (5个链接)
+- 猎聘 (5个链接)
+- BOSS直聘 (5个链接)
+- 前程无忧 (5个链接)
+- 拉勾网 (5个链接)
+
+---
+
+## 🏢 目标公司
+
+**大厂**: 华为、小米、字节跳动、阿里巴巴、腾讯、百度、美团、京东
+
+**智能家居**: 海尔、美的、格力、TCL、涂鸦、绿米、欧瑞博
+
+**机器人/AI**: 大疆、科沃斯、石头科技、追觅
+
+**外企**: 博世、西门子、三星、LG
+
+---
+
+## 💡 投递策略提醒
+
+1. 突出AI产品经验（HomeGPT、AI烤箱）
+2. 强调0-1业务操盘能力
+3. 量化成果（5亿营收、$1000万成本优化）
+
+---
+
+## 📋 今日待办
+
+- [ ] 访问LinkedIn搜索AI Product Director
+- [ ] 访问猎聘搜索AI产品总监
+- [ ] 投递5-10个匹配职位
+- [ ] 记录投递状态
+
+---
+
+详细报告位置:
+/root/.openclaw/workspace/Headhunter_Reports/headhunter_report_2026-02-17.md
+
+---
+报告生成: AI Headhunter Assistant
+日期: {today}
 """
+
+
+def send_email():
+    """发送邮件"""
+    try:
+        msg = MIMEText(EMAIL_BODY, 'plain', 'utf-8')
+        msg['From'] = formataddr(("AI猎头助手", SENDER_EMAIL))
+        msg['To'] = ", ".join(RECEIVERS)
+        msg['Subject'] = EMAIL_SUBJECT
+
+        print(f"📧 正在连接 SMTP 服务器...")
         
-        msg.attach(MIMEText(email_body + report_content, 'plain', 'utf-8'))
-        
-        print(f"📧 正在连接 SMTP 服务器: {SMTP_SERVER}:{SMTP_PORT}")
-        
-        # 连接服务器并发送
         server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
         server.starttls()
         server.login(SENDER_EMAIL, APP_PASSWORD)
         
         print(f"✅ 登录成功")
-        print(f"📤 正在发送邮件给: {RECEIVER}")
+        print(f"📤 正在发送邮件给: {', '.join(RECEIVERS)}")
         
-        server.sendmail(SENDER_EMAIL, [RECEIVER], msg.as_string())
+        server.sendmail(SENDER_EMAIL, RECEIVERS, msg.as_string())
         
         print(f"✅ 邮件发送成功！")
         server.quit()
@@ -106,20 +129,14 @@ AI Headhunter Assistant
 
 if __name__ == "__main__":
     print("=" * 60)
-    print("📧 AI猎头任务报告 - 邮件发送")
+    print("📊 每日猎头任务汇总 - 邮件发送")
     print("=" * 60)
-    
-    # 读取报告
-    report_content = read_report()
-    if not report_content:
-        sys.exit(1)
-    
-    print(f"✅ 报告读取成功 ({len(report_content)} 字符)")
     print(f"发件人: {SENDER_EMAIL}")
-    print(f"收件人: {RECEIVER}")
+    print(f"收件人: {', '.join(RECEIVERS)}")
+    print(f"主题: {EMAIL_SUBJECT}")
     print("=" * 60)
     
-    if send_email(report_content):
+    if send_email():
         print("\n✨ 完成！邮件已成功发送。")
         sys.exit(0)
     else:
