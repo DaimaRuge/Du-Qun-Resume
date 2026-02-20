@@ -488,6 +488,22 @@ tar -czvf /root/.openclaw/workspace/backups/YYYY-MM-DD/workspace_backup.tar.gz ~
 - 目标职位: AI产品总监、智能家居负责人、AIoT战略
 - 执行时间: 2026-02-20 10:00:13 (上海时间)
 
+### ✅ 下午场 (14:00)
+1. ✅ 运行 headhunter_task.py 脚本生成新增搜索链接
+2. ✅ 发送邮件汇总至 broadbtinp@gmail.com
+3. ✅ 创建飞书文档（下午场）: https://feishu.cn/docx/TwSZd6wIho0k6OxYIIYcVIZ5np9
+4. ✅ GitHub同步: commit 60e80a2
+
+### 下午场搜索统计
+- 新增链接: 5个
+- 执行时间: 2026-02-20 14:00:13 (上海时间)
+- 邮件主题: 🎯 每日猎头任务汇总 - 2026-02-20（下午场）
+
+### 📊 今日完整汇总
+- **上午场**: 25个链接 + 邮件 + 飞书 + GitHub (commit f4c9a7a)
+- **下午场**: 5个新增链接 + 邮件 + 飞书 + GitHub (commit 60e80a2)
+- **总计**: 30个搜索链接，覆盖5个平台
+
 ---
 
-*最后更新: 2026-02-20 02:00*
+*最后更新: 2026-02-20 06:00*
